@@ -5,8 +5,6 @@
 
 English → [README_EN.md](README_EN.md)
 
-> 本插件前身为 `ComfyUI_H3_Toolkit`，2026-10-14 起更名：节点 ID、分类与 HTTP 路由统一改为 `TT` / `TT_MiniMaxH3` 前缀。旧工作流里的 `H3Kit*` 节点类型需重新指向新节点。
-
 ## 功能介绍
 
 TT_MiniMaxH3 是一套**自包含**的 MiniMax H3 长视频/口播工作流节点包。它不替换官方 H3 节点，而是补上官方链路缺的三件事：**按分段计划逐段生成、跑完自动接力下一段**、**上一段尾部画面/音频作为运动上下文引导下一段**、**自动合并并做接缝质检**。底层复用官方 `MiniMaxH3ImageToVideo` / `MiniMaxH3ReferenceToVideo` 的 conditioning 协议（`minimax_keyframes` / `minimax_refs` / 嵌套 `noise_mask`），因此与原生 H3 采样、CLIP Loader（`type` 必须选 `minimax`）直接兼容。
@@ -191,7 +189,6 @@ ffmpeg 查找顺序：环境变量 `FFMPEG_PATH` → 插件 `bin/ffmpeg.exe` →
 
 ## 常见问题
 
-* **节点分类里找不到旧名字？** 插件已从 `H3工具` 更名为 `TT_MiniMaxH3`，节点 ID 前缀由 `H3Kit` 改为 `TT`，旧工作流需重新连节点。
 * **分段 JSON 从哪来？** 本仓库版本不含语音识别节点：把外部识别环节产出的 JSON 直接粘进控制台的「分段JSON」输入框，或由任意上游节点输出该 JSON（文本节点、你自己的 WhisperX 类链路都行）；`AudioToAudioPath` 负责把 `AUDIO` 交给外部工具。
 * **口型对不上/画面与音频时长不一致？** 用「⏱数字人/MV 时长裁剪」把生成段裁到源音频时长，它会重算输出帧率保证容器时长精确对齐。
 * **多段接缝处闪一下/颜色跳变？** 先用「🩺接缝医生」定位是哪一维异常，再用「🎬视频合并（曝光锁定·接缝修复）」合并。
@@ -213,13 +210,6 @@ ffmpeg 查找顺序：环境变量 `FFMPEG_PATH` → 插件 `bin/ffmpeg.exe` →
 ## 版本与更新日志
 
 当前版本：**v1.1.0**（2026-10-14）。完整变更记录见 [CHANGELOG.md](CHANGELOG.md)，打包发行见 [Releases](https://github.com/canyuevip/ComfyUI_TT_MiniMaxH3/releases)。
-
-本插件有两个发行版本，同一套代码、同一个版本号：
-
-| 版本 | 仓库 | 内容 |
-| --- | --- | --- |
-| 公开精简版 | 本仓库 | 18 个节点，不含「🎵音频自动分段」与「Qwen H3 提示词扩写（本地）」，零自动下载、零外部运行时 |
-| 完整版 | `ComfyUI_TT_MiniMaxH3-full`（私有，需授权访问） | 20 个节点，含上述两个依赖大模型的节点 |
 
 ## 致谢
 

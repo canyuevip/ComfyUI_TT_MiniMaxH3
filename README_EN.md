@@ -5,8 +5,6 @@ Repository: [canyuevip/ComfyUI_TT_MiniMaxH3](https://github.com/canyuevip/ComfyU
 
 中文 → [README.md](README.md)
 
-> This plugin was previously named `ComfyUI_H3_Toolkit`. Since 2026-10-14 the node IDs, categories and HTTP routes all use the `TT` / `TT_MiniMaxH3` prefix. Workflows saved with `H3Kit*` node types need to be re-pointed to the new nodes.
-
 ## Overview
 
 TT_MiniMaxH3 does not replace the official H3 nodes. It fills the three gaps that a long talking-head pipeline actually needs: **generating one segment at a time from a segment plan and chaining the runs automatically**, **handing the previous segment's tail frames/audio to the next segment**, and **merging plus inspecting the seams when the chain finishes**. It writes the same conditioning protocol as the official `MiniMaxH3ImageToVideo` / `MiniMaxH3ReferenceToVideo` nodes (`minimax_keyframes` / `minimax_refs` / nested `noise_mask`), so it stays compatible with stock H3 sampling and with the CLIP Loader (`type` must be `minimax`).
@@ -189,7 +187,6 @@ ffmpeg lookup order: `FFMPEG_PATH` -> plugin `bin/ffmpeg.exe` -> `imageio-ffmpeg
 
 ## Troubleshooting
 
-* **Old category gone?** The plugin was renamed from `H3工具` to `TT_MiniMaxH3` and node IDs from `H3Kit*` to `TT*`; reconnect old workflows.
 * **Where does the segment JSON come from?** This edition ships no speech-recognition node: paste JSON produced by your own speech recognition into the console's **segment JSON** box, or provide it from a string node or a WhisperX-style chain of your own. `AudioToAudioPath` hands `AUDIO` to external tools.
 * **Lip-sync drift or audio/video length mismatch?** Use `TTDurationCrop` to cut the generated segment to the source duration; it recomputes the frame rate so container length matches exactly.
 * **Flash or color jump at a seam?** Locate the dimension with `TTSeamDoctor`, then merge with `TTExposureMerge`.
@@ -211,13 +208,6 @@ The browser panels in `js/` use these local endpoints, same-origin with the Comf
 ## Versioning and changelog
 
 Current version: **v1.1.0** (2026-10-14). Full history lives in [CHANGELOG.md](CHANGELOG.md); packaged builds in [Releases](https://github.com/canyuevip/ComfyUI_TT_MiniMaxH3/releases).
-
-Two editions, same codebase, same version number:
-
-| Edition | Repository | Contents |
-| --- | --- | --- |
-| Public lite | this repository | 18 nodes, without the audio segmenter and the local Qwen prompt expander; no automatic downloads, no external runtime |
-| Full | `ComfyUI_TT_MiniMaxH3-full` (private, access on request) | 20 nodes, including those two model-heavy ones |
 
 ## Credits
 
