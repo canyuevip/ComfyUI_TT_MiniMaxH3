@@ -1,0 +1,5 @@
+# AudioToAudioPath：AUDIO 落盘为 wav，供外部语音识别工具产出分段
+torchaudio
+
+# ffmpeg（视频合并 / 接缝修复节点）：与生态惯例一致走 pip 包，不打包二进制
+imageio-ffmpeg

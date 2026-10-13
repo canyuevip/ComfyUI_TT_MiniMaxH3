@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.pyc
+
+# 本地自备 ffmpeg（可选，不入库；见 README「ffmpeg」）
+bin/ffmpeg.exe
+
+# 已移出注册的旧节点（保留代码供恢复，不入库）
+_待删除/
